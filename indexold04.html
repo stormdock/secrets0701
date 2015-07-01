@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Secrets.js 01</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+<style>
+	@font-face {
+	  font-family: 'Days One';
+	  font-style: normal;
+	  font-weight: 400;
+	  src: local('Days One'), local('DaysOne-Regular'), url(daysOne.ttf) format('truetype');
+	}
+
+	body{
+		background-image: url("data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAACMAAAAiCAMAAADiW5DOAAAAaVBMVEUjIyMlJSUhISEaGhoZGRkcHBwREREHBwcMDAwODg4PDw8NDQ0LCwsICAgQEBAYGBgbGxsiIiIkJCQUFBQKCgoVFRUJCQkSEhITExMdHR0XFxcFBQUGBgYfHx8WFhYeHh4gICAEBAQmJiYtaDO6AAAC4UlEQVR42iVTi5arIAykl4cSMNAFeah1t/v/H3knXT3VyoQkMxmUUo8Hfv+0NtYtq6cQvI8bW53y8wsIbmAmy2VyCXElZscUatiNBpRtTlklqw0+EtL45r3rozjmtbK22Rid9TRqpozwiW/L1XMvY++uh3XIPiuZkkpG4lEPyTggS9nHcIFzxkpG9iOrel7Xspyr0eZ1e8TsexmO9m9j73pd57ks6ty2pbWz7drM3LkPhHRXtDV5LEuttZ2qtjVGkI1aJ3tIot7Z6W+T7/WKYFpXFSl48iFUhw5sD647Tzd4T2rN0wpMeSLX2YdaE6o9H0/R9CcbXVao5bhzUEIXilCsA0H5OyfQsVpbXwMxSg9SHiEDbH0teuojHeBrRPu+hi5SlK7wkst5D7WgmDnw0BAYarkBcOzKiWr7IJ+m1iK3aIdHmrdngfqtPrKhofHK4N7O7Trf55om5O88gPWhGFMcnbpshjm2Zavt2gYSvg5gaIcV0+hMvNusU2qtxRWaLsEk1NwJPiCnfpTY7OuF6em+Re+hFdUmiezr+fhV6qmmMSJIBqej1uAgqOPQ1iOLecSBVh1iwTtlaxNfyD1AmMg3B9QksdBEnoQNaMYmt0F6kYSYas9a1oHCq3hrKY6b2JVyQzYXKItQny4OeGy5zuusyaAauYGYUZiOqS3M8T6X81TbVdvW3sttjf52kqigoTExMwePAVxUrTFAkdrEY5k9PFZ8twafcQNRQCquwcNisXbpHFUcdRoZffSt+uA5eBXQqGNC0GHM/Pd4/H6p58/U6Y4tABnEij7zcrRuu3gLXBE6UYoatpcOTIkNZXCh7UeC/TA3vGAijqiwg0FXPIr8Ye+1zYhIH+n+TiTjIB2j/MXAq5TQg0nSuKig0zxIPHZ/YvZdTi9PUTq+r+u9vSN013NQH/dAreBQsXPPsszL1XAt8NjHKzR2VFAlgHt3xWI2d9wgGY5m88eE/QcLefcf4Go/mGyl89EAAAAASUVORK5CYII="); zoom: 1; background-repeat: repeat repeat; background-attachment: fixed;
+		cursor: default;
+	}
+	#masthead{
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
+	#marketing{
+		background: rgba(238, 238, 238, 0.9);
+		color: black;
+		padding-top: 30px;
+		margin-top: 20px;
+		margin-bottom: 90px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px
+	}
+	.customLink{
+		opacity: 1;
+		color: #cc1111;
+	}
+	.customLink:hover{
+		color: #cc1111;
+		text-decoration: underline;
+	}
+	.lead{
+		padding: 15px;
+	}
+	.titleContainer{
+		display: inline-block;
+		color: #ccc;
+	}
+	.title{
+		margin-top: 20px;
+		margin-bottom: 0px;
+		font-size:235%;
+		font-weight: bold;
+		display: inline-block;
+	}
+	.Pass {
+		font-family: 'Days One';
+		color: #2066B9;
+		cursor: default;
+	}
+	.Guardian {
+		font-family: 'Days One';
+		color: #cc1111;
+		cursor: default;
+	}
+	.strokeLogo span{
+		text-shadow:
+			-1px -1px 0 #fff,  
+		    1px -1px 0 #fff,
+		    -1px 1px 0 #fff,
+		     1px 1px 0 #fff;
+	}
+	.reg{
+		font-size: 30%;
+		cursor: default;
+	}
+	.subtitle {
+		font-family: Monospace;
+		float: right;
+		font-size: 120%;
+		padding-top: 0px;
+		margin-top: 0px;
+		padding-right: 17px;
+		font-style: italic;
+	}
+	.center{
+		text-align: center;
+	}
+	.clear{
+		clear: both;
+	}
+	.jumbo{
+		font-size: 220%;
+	}
+	section{
+		background: #fff;
+		padding-left: 5px;
+		padding-right: 5px;
+		margin-bottom: 70px;
+		border: 2px solid #2066B9;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px
+	}
+	section>h3{
+		font-family: 'Days One';
+		background: #ddd;
+		color: #2066B9;
+		padding-left: 10px;
+		margin-left: -5px;
+		margin-right: -5px;
+		margin-top: 0px;
+		border-bottom: 2px solid #2066B9;
+	
+	}
+	.toTop{
+		margin: 6px;
+	}
+	form{
+		padding: 10px;
+		padding-bottom: 0px;
+		padding-top: 0px;
+	}
+	.btnCustom{
+		font-family: 'Days One';
+	}
+
+	#shares,
+	#reconstruction,
+	#split-hash,
+	#recon-hash{
+		padding: 2px;
+		padding-left: 4px;
+		overflow-x: auto;
+		background: white;
+		margin-left: -14px;
+		margin-right: -35px;
+		margin-bottom:-14px;
+		margin-top: 4px;
+		max-height: 300px;
+	}
+	#shares,
+	#split-hash,
+	#recon-hash{
+		white-space: nowrap;
+	}
+	#reconstruction{
+		word-wrap: normal;
+		word-break: normal;
+		white-space: pre;
+	}
+
+	#shares div{
+		margin-bottom: 1px;
+	}
+
+	#reconShares{
+		white-space: nowrap;
+		font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+	}
+
+	.shareInput{
+		margin-top: 4px;
+	}
+
+	.footer{
+		padding: 10px;
+		text-align: center;
+		background: #ddd;
+		margin-bottom: 20px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px
+	}
+
+	.nav{
+		margin-bottom: 10px;
+	}
+
+	#inputShares{
+		margin-bottom: 5px;
+	}
+	.advancedElement{
+		display: none;
+	}
+</style>
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/x64-core.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha3.js"></script>
+
+<script src="http://localhost:3000/secrets.js"></script>
+
+<script>
+	secrets.setRNG(null, false);
+
+	function error(location, message, hide){
+		$($(location).parent()).before('<div class="alert alert-error fade in popupError"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Error</h4>'+message+'</div>')
+		if(hide){
+			$(hide).hide();
+		}
+		$(location).removeClass('disabled');
+	}
+	$(document).on('click', '#splitButton', function(ev){
+		var el = $(this)
+		if(el.hasClass('disabled')){
+			return;
+		}else{
+			el.addClass('disabled');
+		}
+	
+		if(secrets.getConfig().bits !== 8){
+			secrets.init(8);
+		}
+		$('#split-tab .popupError').remove();
+	
+		var string = $('#string').val();
+		if(string === ''){
+			return error(this, 'Input cannot be empty.', '#split-result')
+		}
+		var hash = CryptoJS.SHA3(string);
+		var type = $('.inputType.active').attr('data-inputType');
+		var numShares = $('#numShares').val() * 1;
+		if(typeof numShares !== 'number' || isNaN(numShares) || numShares < 2 || numShares > 255){
+			return error(this, 'Number of shares must be an integer between 2 and 255, inclusive.', '#split-result')
+		}
+		var threshold = $('#threshold').val() * 1;
+		if(typeof threshold !== 'number' || isNaN(threshold) || threshold < 2 || threshold > 255){
+			return error(this, 'Threshold must be an integer between 2 and 255, inclusive.', '#split-result')
+		}
+	
+		if(type==='text'){
+			string = secrets.str2hex(string);
+		}
+		if(!$('#shares').length){
+			$(this).parent().after('<div id="split-result" style="display:none;" class="alert alert-block alert-success fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Secret shares</h4>One share per line<pre id="shares"></pre></div>');
+		}
+		try{
+			var shares = secrets.share(string, numShares, threshold);
+			var textarea = $('#shares');
+			shares = shares.join('<br>');
+			textarea.html(shares);
+			$('#split-hash').text(hash)
+			$('#split-result').show();
+			secrets.getConfig().unsafePRNG ? $('#PRNGwarning').show() : $('#PRNGwarning').hide();
+			numShares<threshold ? $('#mismatchWarning').show() : $('#mismatchWarning').hide();
+		}catch(e){
+			return error(this, e, '#split-result')
+		}
+		el.removeClass('disabled');	
+	});
+
+	$(document).on('click', '#reconButton', function(ev){
+		$('#recon-tab .popupError').remove();
+		$('#hashMismatchError').hide();
+		var inputHash = $('#inputhash').val();
+		var shares = [];
+		$('.shareInput').each(function(){
+			var share = $.trim($(this).val());
+			if(share){
+				shares.push(share);
+			}else if($('.shareInput').length >= 3){
+				$(this).remove();
+			}
+		})
+		if(shares.length<2){
+			return error(this, 'Enter at least 2 shares.', '#recon-result')
+		}
+		var type = $('.reconType.active').attr('data-inputType');
+	
+		if(!$('#reconstruction').length){
+			$(this).parent().after('<div id="recon-result" style="display:none;" class="alert alert-block alert-success fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>Reconstructed secret</h4><pre id="reconstruction"></pre></div>');
+		}
+		try{
+			var recon = secrets.combine(shares);
+			if(type === 'text'){
+				recon = secrets.hex2str(recon);
+			}
+			$('#reconstruction').text(recon);
+			
+			try{
+				var hash = CryptoJS.SHA3(recon).toString();
+				$('#recon-hash').text(hash);
+				if(inputHash && $.trim(inputHash) !== hash){
+					$('#hashMismatchError').show();
+				}	
+			}catch(e){
+				if($('#recon-advanced').hasClass('active')){
+					error(this,'SHA3-512 Hash ' + e, '#recon-result');	
+				}		
+			}
+			$('#recon-result').show();
+		}catch(e){
+			return error(this, 'Reconstruction ' + e, '#recon-result')
+		}
+		
+	})
+
+	$(document).on('click', '.generate', function(ev){
+		ev.preventDefault();
+		var rnd = secrets.random($(this).attr('data-bits') * 1);
+		$('#string').replaceWith('<input class="input-block-level" id="string" type="text" placeholder="Secret to share" value="'+rnd+'">')
+		$('.inputType[data-inputType=text]').removeClass('active')
+		$('.inputType[data-inputType=hex]').addClass('active')
+	})
+
+	$(document).on('click', '#addShareButton', function(ev){
+		$('#inputShares').append('<input type="text" class="input-block-level shareInput" placeholder="Enter one share">')
+	})
+
+	$(document).on('click','#clearButton', function(ev){
+		$('#string').val('');
+	})
+
+	$(document).on('click','#clearAllButton', function(ev){
+		$('.shareInput').each(function(){
+			$(this).val('');
+		})
+	})
+
+	$(document).on('click','.inputType[data-inputType=hex]', function(ev){
+		var string = $('#string');
+		var val = string.val().replace(/\n/g,' ');
+		if(string.is('textarea')){
+			string.replaceWith('<input class="input-block-level" id="string" type="text" placeholder="Secret to share" value="'+val+'">')
+		}
+	})
+	$(document).on('click','.inputType[data-inputType=text]', function(ev){
+		var string = $('#string');
+		var val = string.val();
+		if(!string.is('textarea')){
+			string.replaceWith('<textarea class="input-block-level" id="string" type="text" rows="3" placeholder="Secret to share">'+val+'</textarea>')
+		}
+	})
+
+	$(document).on('click','#resetSplitForm', function(ev){
+		$('#split-tab .popupError').remove();
+		var string = $('#string').val('');
+		if(!string.is('textarea')){
+			string.replaceWith('<textarea class="input-block-level" id="string" type="text" rows="3" placeholder="Secret to share"></textarea>')
+		}
+		$('#numShares').val(2);
+		$('#threshold').val(2);
+		$('.inputType.active').removeClass('active');
+		$('.inputType[data-inputType=text]').addClass('active');
+		$('#split-result').hide();
+		$('#shares').empty();
+	  	$('#split-hash').empty();
+	})
+
+	$(document).on('click','#resetReconForm', function(ev){
+		$('#recon-tab .popupError').remove();
+		$('.shareInput').each(function(){
+			if($('.shareInput').length >=3 ){
+				$(this).remove()
+			}else{
+				$(this).val('');
+			}
+		})
+		$('#string').val('');
+		$('#numShares').val(2);
+		$('#threshold').val(2);
+		$('.reconType.active').removeClass('active');
+		$('.reconType[data-inputType=text]').addClass('active');
+		$('#inputhash').val('');
+		$('#recon-result').hide();
+		$('#reconstruction').empty();
+		$('hashMismatchError').empty();
+		$('#recon-hash').empty();
+	})
+
+	$(document).on('click', '#split-simple', function(ev){
+		$('#split .advancedElement').hide();
+		$('.reconType.active').removeClass('active');
+		$('.reconType[data-inputType=text]').addClass('active');
+	});
+
+	$(document).on('click', '#split-advanced', function(ev){
+		$('#split .advancedElement').show();
+	})
+	$(document).on('click', '#recon-advanced', function(ev){
+		$('#reconstruct .advancedElement').show();
+	})
+
+	$(document).on('click', '#recon-simple', function(ev){
+		$('#reconstruct .advancedElement').hide();
+		$('.reconType.active').removeClass('active');
+		$('.reconType[data-inputType=text]').addClass('active');
+	});
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<div id="masthead">
+			<ul class="nav nav-pills pull-right">
+				<li><a href="#split">Split</a></li>
+				<li><a href="#reconstruct">Reconstruct</a></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#uses">Uses</a></li>
+			</ul>
+			<div class="titleContainer">
+				<div class="title"><span class="Pass">Pass</span><span class="Guardian">Guardian</span><sup><span class="reg">TM</span></sup></div>
+				<br>
+				<div class="subtitle">safety in numbers</div>
+			</div>
+		</div>
+		<div id="marketing">
+			<p class="jumbo lead center"><strong>Never store your secrets in one place again.</strong></p>
+			<div class="row">
+			  <div class="span6 box">
+			  	<p class="lead">
+					Store and share your secrets safely by <a href="#split" class="customLink">splitting</a> them into cryptographically-secure pieces. To <a href="#reconstruct" class="customLink">reconstruct</a> the original, combine a specific number of these pieces. It's simple, secure, and free.
+					<br><a href="#split" class="btn btn-primary">Get started</a>
+				</p>
+			</div>
+			  <div class="span6 box">
+				<div class="clear"></div>
+			  	<p class="lead">
+					Use <span class="Pass">Pass</span><span class="Guardian">Guardian</span> to safeguard passwords, private keys, account numbers, secret messages, files...really, any data!
+					<br><a href="#about" class="btn btn-primary">Learn more</a>
+				</p>
+			  </div>
+			</div>
+		</div>
+
+		<div class="toTop pull-right"><a href="#" class="btn"><i class="icon-home"></i></a></div>
+		<section id="split">
+			<h3>Split a secret</h3>
+			<div class="tabble tabs">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#split-explanation" data-toggle="tab">Instructions</a></li>
+					<li><a href="#split-tab" data-toggle="tab">Split</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="split-explanation">
+						<ol>
+						<li><strong>Enter your secret.</strong>
+							<br>For now text is supported.
+						</li>
+						<li><strong>Select the number of <span class="word">shares</span> (pieces) to create.</strong>
+							<br>Each computed share will be random. Each time you compute the shares, they will be different. 
+							The minimum number of shares is 2, and the maximum is 255.
+						</li>
+						<li><strong>Select the <span class="word">threshold</span> number of shares that will be needed to reconstruct the original secret.</strong>
+							<br>The original secret can only be reconstructed when at least the threshold number of shares is present. 
+							The minimum threshold is 2, and the maximum is 255.
+						</li>
+						</ol>
+						<div class="accordion" id="accordion1" style="margin:0px 20px;">
+						  <div class="accordion-group">
+						    <div class="accordion-heading">
+						      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+						        Advanced mode
+						      </a>
+						    </div>
+						    <div id="collapseOne" class="accordion-body collapse">
+						      <div class="accordion-inner">
+						       	In simple mode, the secret is always considered to be text. In advanced mode, the secret can be a number in hexadecimal format. You can also generate a random secret in hexadecimal form using the "Generate" button.
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<a style="margin:20px;" href="#about" class="btn">Read about the theory</a>
+					</div>
+					<div class="tab-pane" id="split-tab">
+						<form class="form-horizontal">
+							<div class="control-group" >
+								<div class="btn-group pull-right" data-toggle="buttons-radio">
+									<button id="split-simple" type="button" class="btn btn-small active"><span class="text-info"><b>Simple</b></span></button>
+									<button id="split-advanced" type="button" class="btn btn-small"><span class="text-success"><b>Advanced</b></span></button>
+								</div>
+							</div>
+							<div class="control-group">
+								<textarea class="input-block-level" id="string" type="text" rows="3" placeholder="Secret to share"></textarea>
+								<div class="btn-group pull-right">
+									<a id="clearButton" class="btn"><i class="icon-trash"></i>Clear</a>	
+								</div>	
+							</div>
+							
+							<div class="control-group advancedElement">
+								<label class="control-label" for="secret-type">Secret type:&nbsp;&nbsp;</label>
+								<div id="secret-type" class="btn-group" data-toggle="buttons-radio">
+									<button type="button" class="inputType btn active" data-inputType="text">Text</button>
+									<button type="button" class="inputType btn" data-inputType="hex">Hexadecimal</button>
+								</div>
+									<div class="btn-group">
+									<button class="btn dropdown-toggle advancedElement" data-toggle="dropdown">Generate <span class="caret"></span></button>
+									<ul class="dropdown-menu">
+										<li><a href="#" class="generate" data-bits="64">64 bit</a></li>
+										<li><a href="#" class="generate" data-bits="128">128 bit</a></li>
+										<li><a href="#" class="generate" data-bits="256">256 bit</a></li>
+										<li><a href="#" class="generate" data-bits="512">512 bit</a></li>
+										<li><a href="#" class="generate" data-bits="1024">1024 bit</a></li>
+										<li><a href="#" class="generate" data-bits="2048">2048 bit</a></li>
+									</ul>
+									</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="numShares">Number of shares:&nbsp;</label>
+								<input id="numShares" type="number" class="span2" step="1" value="2" min="2" max="255" style="margin-right: 30px;">
+							</div>
+							<div class="control-group">	
+								<label class="control-label" for="threshold">Threshold:&nbsp;</label>
+								<input id="threshold" type="number" class="span2" step="1" value="2" min="2" max="255" style="margin-right: 50px;">
+							</div>
+							<div class="control-group">
+								<a id="resetSplitForm" class="btn btn-danger btn-large pull-left">Reset</a>
+								<a id="splitButton" class="btn btn-primary btn-large pull-right">Split</a>
+							</div>
+							<div id="PRNGwarning" style="display: none;" class="alert alert-block alert-warning"><h4>Security Notice</h4> A cryptographically-strong random number generator was not found in your browser. Consider switching to a new browser. The computed shares will not be as secure as possible.</div>
+							<div id="split-result" style="display:none;">
+								<div class="alert alert-block alert-success fade in"><button type="button" class="close" data-dismiss="alert">&times;</button>
+									<h4>Secret shares</h4>
+									One share per line:
+									<pre id="shares"></pre>
+								</div>
+								<div class="alert alert-block alert-success fade in advancedElement"><button type="button" class="close" data-dismiss="alert">&times;</button>
+									<h4>Secret hash</h4>
+									This is the SHA3-512 hash of your secret. It can be used to verify that a reconstruction matches the original secret.
+									<pre id="split-hash"></pre>
+								</div>
+							</div>
+							<div id="mismatchWarning" style="display: none;" class="alert alert-block alert-warning"><h4>Notice</h4> The number of generated shares is less than the threshold and will not be enough to reconstruct the secret.</div>
+							<div class="alert alert-block alert-info"><h4>Security Notice</h4> All computations are performed in your browser. Your secret and the computed shares are never transmitted back to our servers.</div>	
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="toTop pull-right"><a href="#" class="btn"><i class="icon-home"></i></a></div>
+		<section id="reconstruct">
+			<h3>Reconstruct a secret</h3>
+			<div class="tabbable tabs">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#recon-explanation" data-toggle="tab">Instructions</a></li>
+					<li><a href="#recon-tab" data-toggle="tab">Reconstruct</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="recon-explanation">
+						<ol>
+							<li><strong>Enter your shares.</strong>
+								<br>Enter one share in each input box. Make sure you enter at least the threshold number of shares.
+							</li>
+							<li><strong>Click reconstruct</strong>
+								<br>If the threshold number of shares was entered, the reconstructed secret is correct. Otherwise, the reconstruction will be incorrect.
+							</li>
+						</ol>
+						<div class="accordion" id="accordion2" style="margin:0px 20px;">
+						  <div class="accordion-group">
+						    <div class="accordion-heading">
+						      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+						        Advanced mode
+						      </a>
+						    </div>
+						    <div id="collapseTwo" class="accordion-body collapse">
+						      <div class="accordion-inner">
+								<ul>
+									<li><strong>Enter your SHA3-512 hash of the original secret.</strong>
+										<br>If you enter the hash of the original secret, it will be compared to the hash of the reconstruction to make sure that the correct secret was reconstructed.</li>
+									<li><strong>Select secret type.</strong>
+										<br>In simple mode, the reconstructed secret is always text. In advanced mode, the reconstruction can be a number in hexadecimal form.
+								</ul>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						
+						<a href="#about" class="btn" style="margin: 20px;">Read about the theory</a>
+					</div>
+					<div class="tab-pane" id="recon-tab">
+						<form class="form-horizontal">
+							<div class="control-group">
+								<div class="btn-group pull-right" data-toggle="buttons-radio">
+									<button id="recon-simple" type="button" class="btn btn-small active"><span class="text-info"><b>Simple</b></span></button>
+									<button id="recon-advanced" type="button" class="btn btn-small"><span class="text-success"><b>Advanced</b></span></button>
+								</div>
+							</div>
+							
+							<div id="inputShares" class="control-group">
+								Enter your shares:
+								<input type="text" class="input-block-level shareInput" placeholder="Enter one share">
+								<input type="text" class="input-block-level shareInput" placeholder="Enter one share">
+							</div>
+							<div class="control-group">
+								<div class="btn-group pull-right">
+									<button id="clearAllButton" type="button" class="btn"><i class="icon-trash"></i> Clear all</button>
+									<button id="addShareButton" type="button" class="btn"><i class="icon-plus"></i> Add share</button>
+								</div>
+							</div>
+							<div class="control-group advancedElement">
+								Enter your SHA3-512 hash (optional):
+								<input id="inputhash" type="text" class="input-block-level" placeholder="hash">
+							</div>	
+							<div class="control-group advancedElement">
+								<span>Secret type:&nbsp;&nbsp;</span>
+								<div id="recon-type" class="btn-group" data-toggle="buttons-radio">
+									<button type="button" class="reconType btn active" data-inputType="text">Text</button>
+									<button type="button" class="reconType btn" data-inputType="hex">Hexadecimal</button>
+								</div>
+							</div>
+							<div class="control-group">
+								<a id="resetReconForm" class="btn btn-danger btn-large pull-left">Reset</a>
+								<a id="reconButton" class="btn btn-primary btn-large pull-right">Reconstruct</a>
+							</div>
+							<div id="recon-result" style="display:none;">
+								<div class="advancedElement">
+									<div id="hashMismatchError" style="display:none;" class="alert alert-block alert-error">
+										<h4>SHA3-512 Hash Mismatch Error</h4>
+										The hash of the reconstructed secret does not match the entered hash. This could be because:
+										<ol>
+											<li>The hash or one or more shares were entered incorrectly.</li>
+											<li>Less than the threshold number of shares were entered.</li>
+											<li>One or more shares have been tampered with.</li>
+										</ol>
+									</div>
+								</div>
+								<div class="alert alert-block alert-success fade in"><button type="button" class="close" data-dismiss="alert">&times;</button>
+									<h4>Reconstructed secret</h4>
+									<pre id="reconstruction"></pre>
+								</div>
+								<div class="alert alert-block alert-success fade in advancedElement"><button type="button" class="close" data-dismiss="alert">&times;</button>
+									<h4>Reconstruction hash</h4>
+									This is the SHA3-512 hash of the reconstructed secret. This hash should match the hash of the original secret.
+									<pre id="recon-hash"></pre>
+								</div>
+							</div>
+							<div class="alert alert-block alert-info"><h4>Security Notice</h4> All computations are performed in your browser. Your shares and the reconstructed secret are never transmitted back to our servers.</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<div class="toTop pull-right"><a href="#" class="btn"><i class="icon-home"></i></a></div>
+		<section id="about">
+			<h3>About <span class="Pass">Pass</span><span class="Guardian">Guardian</span></h3>
+
+			<h4>Configurable levels of confidentiality and reliability</h4>
+			<p><a href="http://en.wikipedia.org/wiki/Secret_sharing" target="_blank">Secret sharing</a> is a method for distributing a secret among participants or locations. A secret can consist of any data; for example, a password, a message, an account number, an ecnryption key, missile launch codes, or a Bitcoin private key all represent highly sensitive and important secrets. Traditionally, when guarding highly sensitive information, one would have to choose between keeping a single copy of the secret in one location for maximum secrecy, or keeping multiple copies of the secret in different locations for greater reliability. By increasing storage locations or entrusted parties, reliability is increased at the expense of secrecy. Secret sharing addresses this problem by allowing arbitrarily high levels of confidentiality and reliability. 
+			<p>The process of splitting a secret results in a specified number of shares of the secret. Each share is a random number that by itself provides no information about the secret. The secret can be reconstructed only when a sufficient number (threshold) of shares are combined. During the splitting process, one can select the number of shares to create and the threshold needed to reconstruct the secret.
+			<p>Note that during the reconstruction process, a reconstruction is computed for any number of shares. If the number of shares is less than the threshold, this reconstruction of the secret will be INCORRECT.
+			<p>During the share-creation process in advanced mode, <span class="Pass">Pass</span><span class="Guardian">Guardian</span> also computes a <a href="http://en.wikipedia.org/wiki/SHA-3" target="_blank">SHA3-512 cryptographic hash</a> of the secret. This is a unique hash that can be used to verify the authenticity of any reconstructed secret, as the hash of the reconstruction should match the hash of the secret. The secret cannot be derived from the hash. Distribution of this hash is optional, and should only be used to aid in verifying data integrity.
+			
+			<h4>A proven cryptographic algorithm</h4>
+			<p>The secret sharing method that <span class="Pass">Pass</span><span class="Guardian">Guardian</span> employs is based on <a href="http://en.wikipedia.org/wiki/Shamir's_Secret_Sharing" target="_blank">Shamir's threshold secret sharing scheme</a>, named after its discoverer <a href="http://en.wikipedia.org/wiki/Adi_Shamir" target="_blank">Adi Shamir</a>. His 1979 landmark paper, "How to Share a Secret" [<a href="assets/1979_HowToShareASecret_Shamir.pdf" target="_blank">PDF</a>, 70kb], provides the background for this threshold sharing scheme. One of the most useful properties of Shamir's sharing scheme is that it is <a href="http://en.wikipedia.org/wiki/Information_theoretic_security" target="_blank">"information-theoretically secure"</a> and "perfectly secure", in that less than the requisite number of shares provide no information about the secret (i.e. knowing less than the requisite number of shares is the same as knowing none of the shares).
+
+			<h4>Open-source, verifiable implementation</h4>
+			<p><span class="Pass">Pass</span><span class="Guardian">Guardian</span> is built on <a href="https://github.com/amper5and/secrets.js/" target="_blank">secrets.js</a>, an open-source implementation of Shamir's sharing scheme. While secrets.js permits Galois Fields up to 20 bits in size, <span class="Pass">Pass</span><span class="Guardian">Guardian</span> uses an 8-bit binary finite field for computations. The share format is described at the <a href="https://github.com/amper5and/secrets.js/#share-format" target="_blank">secrets.js</a> page. 
+
+			<h4>Privacy and security</h4>
+			<p>All computations are done in your browser. No secrets or secret shares are ever transmitted back to our servers. Once the <span class="Pass">Pass</span><span class="Guardian">Guardian</span> page is loaded in your browser, it can be run offline. For maximum security, it is recommended that you perform computations offline. 
+			<p>Like most website operators, <span class="Pass">Pass</span><span class="Guardian">Guardian</span> collects non-personally-identifying analytics information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. <span class="Pass">Pass</span><span class="Guardian">Guardian</span>'s purpose in collecting non-personally identifying information is to better understand how visitors use its website.
+			<p><span class="Pass">Pass</span><span class="Guardian">Guardian</span> requires the availability of a <a href="http://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator" target="_blank">cryptographically-strong pseudo-random number generator (CSPRNG)</a> during the secret splitting phase only. If a strong PRNG is not found during run-time, <span class="Pass">Pass</span><span class="Guardian">Guardian</span> will use the built-in Math.random(), which is NOT cryptographically secure. Consider upgrading to <a href="http://caniuse.com/#feat=getrandomvalues" target="_blank">a newer browser</a> that supports <a href="http://www.w3.org/TR/WebCryptoAPI/#RandomSource-method-getRandomValues" target="_blank">crypto.getRandomValues()</a> to take advantage of the increased security that this PRNG provides.
+
+		</section>
+
+		<div class="toTop pull-right"><a href="#" class="btn"><i class="icon-home"></i></a></div>
+		<section id="uses">
+			<h3>Use cases</h3>
+				There are many scenarios where secret sharing is useful. Some interesting examples are:
+				<h4>Reliable distributed classified data storage</h4>
+					<p>Shares can be stored on multiple servers and in multiple locations. A security breach in one or more locations would be insufficient to recover the sensitive data. A server breakdown in one or more locations would not necessarily mean loss of classified data, as long as a threshold number of shares remain accessible.
+				<h4>Sharing sensitive information via insecure channels</h4>
+					<p>Shares can be distributed via a combination of secure and insecure channels and media and combined by the recipient to reconstruct the original data. Interception of less than the threshold number of shares would be insufficient to reconstruct the original secret.
+				<h4>Voting and hierarchical delegation of authority</h4>
+					<p>Shares can be distributed to members of a committee. For a policy or process to be initiated, a majority of the members must be present with their shares. A variation of this scenario is when different members are assigned different voting powers by holding different quantities of shares. For example, a bank manager might hold 5 shares of a vault key, and each of his or her subordinate supervisors might hold 1 share. The bank manager's 5 shares are sufficient to unlock the vault, but all 5 supervisors must be present to perform the same task. This can be extended to arbitrary hierarchical schemes where each share is re-shared with a different number of participants, delegating various levels of responsibility and power to the participants.
+					<p>An interesting example of this is the division of the <a href="http://www.icann.org/en/about/learning/factsheets/dnssec-qaa-09oct08-en.htm" target="_blank">DNSSEC</a> root key among 7 Trusted Community Representatives (TCR). DNSSEC is the backbone of internet security and the "root zone" is signed with a key. While the <a href="https://www.iana.org/dnssec/icann-dps.txt" target="_blank">DNSSEC Practice Statement</a> doesn't state what sharing scheme is employed, it is feasible that Shamir's secret sharing is used in a (7,5) configuration, i.e. 5 of the 7 TCRs must be present to reconstruct the root key.
+				<h4>Executing wills</h4>
+					<p>Distribute shares of your passwords, account numbers, etc to trusted parties or family members. All of the parties must be present to gain access to your accounts and private data.
+		</section>
+		
+		<div class="footer">
+			Powered by <a href="https://github.com/amper5and/secrets.js" target="_blank">secrets.js</a>
+			<br>&copy; 2015 Alexander Stetsyuk &lt;alex AT passguardian.com&gt;
+		</div>
+    </div>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-38261789-1']);
+	  _gaq.push(['_setDomainName', 'passguardian.com']);
+	  _gaq.push(['_setAllowLinker', true]);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</body>
